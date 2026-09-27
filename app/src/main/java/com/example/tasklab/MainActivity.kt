@@ -99,5 +99,140 @@ fun Menu() {
             fontSize = 20.sp,
             color = Color(132, 96, 98)
         )
+
+        Spacer(
+            modifier = Modifier.height(15.dp)
+        )
+
+        OutlinedTextField(
+            value = tarefa,
+            onValueChange = {
+                tarefa = it
+            },
+            label = {
+                Text("Nome da tarefa")
+            },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(
+            modifier = Modifier.height(10.dp)
+        )
+
+        OutlinedTextField(
+            value = descricao,
+            onValueChange = {
+                descricao = it
+            },
+            label = {
+                Text("Descrição da tarefa")
+            },
+            modifier = Modifier.fillMaxWidth()
+        )
+
+        Spacer(
+            modifier = Modifier.height(5.dp)
+        )
+
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+
+            Checkbox(
+                checked = importante,
+                onCheckedChange = {
+                    importante = it
+                }
+            )
+
+            Text(
+                text = "Tarefa importante",
+                color = Color(89, 72, 62)
+            )
+        }
+
+        Button(
+            onClick = {
+
+                if (tarefa.isEmpty() || descricao.isEmpty()) {
+
+                    mensagem = "Preencha os campos!"
+
+                } else {
+
+                    if (importante) {
+
+                        listaTarefas.add(
+                            "⭐ $tarefa\n$descricao"
+                        )
+
+                    } else {
+
+                        listaTarefas.add(
+                            "$tarefa\n$descricao"
+                        )
+                    }
+
+                    mensagem = "Tarefa adicionada!"
+
+                    tarefa = ""
+                    descricao = ""
+                    importante = false
+                }
+            },
+            modifier = Modifier.fillMaxWidth()
+        ) {
+
+            Text(
+                text = "Adicionar tarefa"
+            )
+        }
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
+
+        Text(
+            text = mensagem,
+            color = Color(132, 96, 98),
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(
+            modifier = Modifier.height(8.dp)
+        )
+
+        Text(
+            text = "Minhas tarefas",
+            fontSize = 22.sp,
+            color = Color(89, 72, 62),
+            fontWeight = FontWeight.Bold
+        )
+
+        Spacer(
+            modifier = Modifier.height(5.dp)
+        )
+
+        LazyColumn(
+            modifier = Modifier.fillMaxWidth(),
+            verticalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+
+            items(listaTarefas) { tarefaSalva ->
+
+                Card(
+                    modifier = Modifier.fillMaxWidth()
+                ) {
+
+                    Text(
+                        text = tarefaSalva,
+                        modifier = Modifier.padding(16.dp),
+                        fontSize = 17.sp,
+                        color = Color(89, 72, 62)
+                    )
+                }
+            }
+        }
     }
 }
