@@ -3,23 +3,37 @@ package com.example.tasklab
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Button
+import androidx.compose.material3.Card
+import androidx.compose.material3.Checkbox
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateListOf
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.text.font.FontStyle
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.layout.size
-import androidx.compose.ui.res.painterResource
-import androidx.compose.foundation.layout.Row
 import com.example.tasklab.ui.theme.TaskLabTheme
 
 class MainActivity : ComponentActivity() {
@@ -38,39 +52,52 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Menu() {
 
+    var tarefa by remember {
+        mutableStateOf("")
+    }
+
+    var descricao by remember {
+        mutableStateOf("")
+    }
+
+    var importante by remember {
+        mutableStateOf(false)
+    }
+
+    var mensagem by remember {
+        mutableStateOf("")
+    }
+
+    var listaTarefas = remember {
+        mutableStateListOf<String>()
+    }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color(255,  247, 229 )),
+            .background(Color(255, 247, 229))
+            .padding(20.dp),
 
-        horizontalAlignment = Alignment.CenterHorizontally,
-
-        verticalArrangement = Arrangement.spacedBy(
-            space = 15.dp,
-            alignment = Alignment.CenterVertically
-        )
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
 
         Image(
-            painter = painterResource(id = R.drawable.lista_tarefa), // Nome do seu arquivo na pasta drawable
-            contentDescription = "Logo do Aplicativo",           // Descrição para acessibilidade
-            modifier = Modifier.size(200.dp)                     // Define o tamanho do logo
+            painter = painterResource(id = R.drawable.lista_tarefa),
+            contentDescription = "Logo da Lista de Tarefas",
+            modifier = Modifier.size(100.dp)
         )
 
         Text(
-            text = "Lista De Tarefa",
-            fontSize = 39.sp,
+            text = "Lista de Tarefas",
+            fontSize = 32.sp,
             color = Color(89, 72, 62),
             fontWeight = FontWeight.SemiBold
         )
 
         Text(
-            text = "Organizando sua vida",
-            fontSize = 25.sp,
-            color = Color(132, 96, 98),
-            fontWeight = FontWeight.Light
+            text = "Organize suas atividades",
+            fontSize = 20.sp,
+            color = Color(132, 96, 98)
         )
-
-
     }
 }
