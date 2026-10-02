@@ -68,7 +68,7 @@ fun Menu() {
         mutableStateOf("")
     }
 
-    var listaTarefas = remember {
+    val listaTarefas = remember {
         mutableStateListOf<String>()
     }
 
